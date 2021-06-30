@@ -1,0 +1,164 @@
+validUserData:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "%random%"
+
+validUserDataOtherPassword:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test12345!"
+  username: "%random%"
+
+# Valid first name boundary data
+
+firstName1Char:
+  firstName: "F"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "%random%"
+
+# Negative first name data
+
+firstName15Char:
+  firstName: "FirstNameFirstN"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "%random%"
+
+firstName16Char:
+  firstName: "FirstNameFirstNa"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "%random%"
+
+firstName32Char:
+  firstName: "FirstNameFirstNaFirstNameFirstNa"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "%random%"
+
+firstNameEmpty:
+  firstName: ""
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "%random%"
+
+# Valid last name boundary data
+
+lastName1Char:
+  firstName: "FirstName"
+  lastName: "L"
+  password: "Test1234!"
+  username: "%random%"
+
+# Negative last name data
+
+lastName15Char:
+  firstName: "FirstName"
+  lastName: "LastNameLastNam"
+  password: "Test1234!"
+  username: "%random%"
+
+lastName16Char:
+  firstName: "FirstName"
+  lastName: "LastNameLastName"
+  password: "Test1234!"
+  username: "%random%"
+
+lastName32Char:
+  firstName: "FirstName"
+  lastName: "LastNameLastNameLastNameLastName"
+  password: "Test1234!"
+  username: "%random%"
+
+lastNameEmpty:
+  firstName: "FirstName"
+  lastName: ""
+  password: "Test1234!"
+  username: "%random%"
+
+lastNameNull:
+  firstName: "FirstName"
+  lastName: "null"
+  password: "Test1234!"
+  username: "%random%"
+
+# Negative password data
+
+passwordNoCapital:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "test1234!"
+  username: "%random%"
+
+passwordNoSmall:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "TEST1234!"
+  username: "%random%"
+
+passwordNoNumber:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Testing!"
+  username: "%random%"
+
+passwordNoSpecial:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test12345"
+  username: "%random%"
+
+password40Char:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Testing1234567890!!!!!!!!!!!!!!!!!!!!!!!"
+  username: "%random%"
+
+passwordEmpty:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: ""
+  username: "%random%"
+
+# Negative username data
+
+username5Char:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "%random5%"
+
+username51Char:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm%random5%"
+
+# Valid username data
+
+username6Char:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "m%random5%"
+
+username7Char:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "mm%random5%"
+
+username49Char:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm%random5%"
+
+username50Char:
+  firstName: "FirstName"
+  lastName: "LastName"
+  password: "Test1234!"
+  username: "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm%random5%"
+
