@@ -40,6 +40,9 @@ public class Users implements Serializable {
   @Column(name = "username", nullable = false)
   private String username;
 
+  @Column(name = "created_at", nullable = false)
+  private String createdAt;
+
   public String getId() {
     return id;
   }
@@ -75,5 +78,7 @@ public class Users implements Serializable {
   public String getUsername() {
     return username;
   }
+
+  public String getCreatedAt() { return createdAt; }
 
 }

@@ -102,7 +102,7 @@ public class UserServiceSteps {
     registrationClient.deleteAllUsers();
   }
 
-  @Then("verify register user response has proper data from context")
+  @Then("verify that user details response has proper data from context")
   public void verifyRegisterUserResponse() {
     assertThat(scenarioContext.contains(REGISTER_DATA)).isTrue();
     LoginRequest expected = scenarioContext.get(REGISTER_DATA);

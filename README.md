@@ -1,5 +1,12 @@
 # FRAMEWORK USAGE
 
+## Introduction
+Defects.md file contains defects found in application under test.
+Here we have full API testing framework that is scalable and configurable enough for commercial usage.
+With it I wanted to demonstrate one of the ways one API testing framework can look like. Purpose is to wrap technologies used 
+so it can allow QA engineers to write tests in convenient way following pattern without having to know much about technical details behind - 
+e.g. doesn't need to be proficient in Spring - just autowire stuff it needs...
+
 ## Running tests using Maven
 You should navigate to this project root directory and open terminal at this folder - IDEA always opens 
 terminal at project root folder. Starting command is ```mvn``` then ```test``` following options with which you
@@ -16,28 +23,19 @@ Following variables are available:
 ```bash
 Variable              Default value       Is mandatory     Description
 
-env                   no default value    yes              Just to show how we can user different properties, use petstore value
-test.suite            AllTests            no               To select which test suite will be ran, AllTests includes all tests and then it is best to use metafilter.
-file.logging.level    FINE                no               To manage how much logging info we save in log file
-console.logging.level FINE                no               To manage how much logging info we show in console
-meta.filters          Empty string        no               Will be discussed in next section
+env                   no default value    yes              Just to show how we can user different properties, use local value for testing local instance of app
+db.key                no default value    yes              Key for db connection password decription - Use keyForDbPasswordEncryption value.
+cucumber.filter.tags  Empty string        no               For filtering tests to run according to scenario / feature tags
 connection.timeout    60000               no               Sets how much fmwk will wait for service response in millis
 ```
 
-### Meta Filters
-Every scenario and story file can have ```Meta:``` tags. Every meta tag value should start with ```@``` character.
-Using ```meta.filters``` groovy boolean expression in run configuration we can conveniently filter tests we want to include
-or exclude in test run see example on how it is used below:
-```"-Dmeta.filters=groovy: debug && !skip"``` if we use groovy meta filter like this in maven run configuration we will 
-execute all stories or scenarios that have ```Meta: @debug``` and don't have ```Meta: @skip``` tags.
+### Cucumber filter tags
+Every scenario and feature file can have tags defined. Every tag value should start with ```@``` character.
+Using ```cucumber.filter.tags``` cucumber expression in run configuration we can conveniently filter tests we want to include
+or exclude in test run, see example on how it is used below:
+```-Dcucumber.filter.tags="@debug and not @skip"``` if we use cucumber filter like this in maven run configuration we will 
+execute all features or scenarios that have ```@debug``` and don't have ```@skip``` tags.
 
-There are several meta tags we need you use for marking our tests in convenient way:
-
-```bash
-Meta tag   Description
-
-@feature   Allure will group all scenarios with same feature tag values
-```
 
 ### Run test examples
 For running tests it is best to create maven run configurations in your environment.
@@ -45,39 +43,39 @@ NOTE: This file is written on MacOS so be careful when copy pasting command line
 Below are some examples of command line argument for various test executions:
 
 ```
-clean test -PincludeTests -Denv=petstore
+clean test -PincludeTests -Denv=local -Ddb.key=keyForDbPasswordEncryption
 ```
 
-This will execute all tests that are present in default AllTests suite.
+This will execute all tests that are present in cucumber glue path - in resources.framework.features path.
 
 ```
-clean test -PincludeTests -Denv=petstore  "-Dmeta.filters=groovy: defect==\"ADIDAS-1703\""
+clean test -PincludeTests -Denv=local  -Dcucumber.filter.tags="@debug and not @skip" -Ddb.key=keyForDbPasswordEncryption
 ```
 
-This will execute all tests that have ```Meta: @defect ADIDAS-1703``` tag on petstore base environment property values.
+This will execute all tests that have ```@debug``` and not ```@skip``` tag on local base environment property values.
 
 ```
-clean test -PincludeTests -Denv=petstore  "-Dmeta.filters=groovy: feature==\"ManagingPetsInStore\""
+clean test -PincludeTests -Denv=local  -Dcucumber.filter.tags=@RegisterUser -Dconnection.timeout=10000
 ```
 
-This will execute all tests that have ```Meta: @feature ManagingPetsInStore``` tag on petstore base environment property values.
+This will execute all tests that have ```@RegisterUser``` tag on local base environment property values with response wait time of 10s.
 
-```
-clean test -PincludeTests -Denv=petstore  "-Dmeta.filters=groovy: !skip"
-```
-
-This will execute all tests on petstore base environment that don't have ```Meta: @skip``` tag.
-
-```
-clean test -PincludeTests -Denv=petstore  "-Dmeta.filters=groovy: !skip && defect==\"ADIDAS-1703\""
-```
-
-This will execute all tests on petstore base environment that don't have ```Meta: @skip``` tag and have ADIDAS-1703 defect tag.
 
 ## Generating Allure report
 First you need Allure installed on your machine - instructions https://docs.qameta.io/allure/
 For presenting test run results in convenient way we are using allure reporting tool. To show results in browser type after execution in terminal:
-```allure serve target/allure-result```
+```allure serve target/allure-results```
+
+Also more convenient way of generating allure results is using allure_report.sh shell script. Just type ```sh allure-report.sh```.
+
+
+## View Cucumber HTML report
+It is recommended to user allure reports for results view cause it is very detailed and pretty report. If for some reason
+you cannot install allure on your machine, you can rely on cucumber html reports stored at ```target/cucumber-reports/index.html```
+
+## Report attachment on failed test
+When test fails you can find attached request / response log in allure / cucumber html report. 
+For allure report simply open failed test and expand teardown section.
 
 ## Logging
 In Console and in ```target/TestServices.log``` file run logs are saved / shown
@@ -88,17 +86,21 @@ In Console and in ```target/TestServices.log``` file run logs are saved / shown
 1. Java
 2. Maven
 3. Spring boot - Dependency injection and IoC
-4. JBoss resteasy client - Client for making actual service calls
-5. JBehave - BDD layer
+4. spring-orm - For establishing database connection
+4. Rest assured client - Client for making actual service calls
+5. Cucumber - BDD layer
 6. Jackson - JSON serialization and deserialization
-7. Groovy - Groovy meta filters for test execution
-8. Assertj - For assertions
-9. Snakeyaml - Deserialization of .yaml files
-10.Allure - Reporting
+7. Assertj - For assertions
+8. Snakeyaml - Deserialization of .yaml files
+9. Allure - Reporting
 
 ## Potential improvements
 ```
-What                                                   How
-Multithreading capability                              Implement spring framework Scope interface and use ThreadLocal to store all components annotated with @Scope(MyScope.NAME)
-Display scenario meta filter values in Allure report   Inside JBehaveAllureReporter class example and beforeScenario methods use setLinks method on TestResult object
+What                                                                                   How
+Multithreading capability                                                              Implement spring framework Scope interface and use ThreadLocal to store all components annotated with @Scope(MyScope.NAME).
+Several database connections using spring orm                                          Implementation is similar to current one just since we would be creating beans with same return types we would need to define @Qualifier annotations for such beans.
+Allure attachment below test steps - not in teardown                                   It would require custom allure lifecycle implementation - therefore we wouldn't attach screenshot in @After in Hooks.class
+Constructor based dependency injection                                                 It is best practice not to use field injections since it is internally using reflection and can cause some performance issues if framework grows substantialy
+Run application under test in local env before tests and close it after tests are done Create maven profile and inject script that will build app - one of parameters provided can be path to .war file on local machine. 
+Remove annoying spring boot INFO and DEBUG logs from console                           Identify dependencies that are generating these logs and use log4j.xml file to manage them
 ```

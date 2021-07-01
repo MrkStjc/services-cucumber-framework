@@ -8,7 +8,13 @@ Feature: Register new user using PUT /users/register API.
 
     Given I create new user with data: validUserData
     Then status code is 2xx
-    Then verify register user response has proper data from context
+    Then verify that user details response has proper data from context
+
+  @Issue1 @smoke
+  Scenario: Register new user and verify it is properly stored in database
+    Given I create new user with data: validUserData
+    Then status code is 2xx
+    Then verify that user has data in db from test data: validUserData
 
   @smoke
   Scenario: Bad request Error on registration attempt of new user with same data as existing one

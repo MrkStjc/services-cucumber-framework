@@ -3,6 +3,7 @@
 Feature: Login user using POST /users/register API.
 
 
+  @smoke
   Scenario: Success on login attempt for new user
 
     Given I create new user with data: validUserData
@@ -11,6 +12,7 @@ Feature: Login user using POST /users/register API.
     Then status code is 2xx
 
 
+  @negative
   Scenario Outline: Unable to login with non existing username or password
 
     Given I create new user with data: validUserData
@@ -23,10 +25,8 @@ Feature: Login user using POST /users/register API.
     |fieldName |value                |
     |USERNAME  |nonexistinguser345444|
     |PASSWORD  |Marko12345!!         |
-    |FIRST_NAME|IDontExistFN         |
-    |LAST_NAME |IDontExistLN         |
 
-
+  @negative @smoke
   Scenario: Unable to login using existing user username and other user password
 
     Given I create new user with data: validUserData
