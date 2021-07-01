@@ -25,7 +25,9 @@ Feature: Delete user and all users using DELETE /users/{username} or /users/dele
     |null              |
     |nonExistingUser123|
 
-    @debug
+  @skip
   Scenario: Delete all users
 
     When I delete all users
+    Then status code is 2xx
+    Then verify that response has message: All users removed

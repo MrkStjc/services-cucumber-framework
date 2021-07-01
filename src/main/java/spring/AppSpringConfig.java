@@ -2,12 +2,9 @@ package spring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import framework.models.requests.LoginRequest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.retry.annotation.EnableRetry;
 import org.yaml.snakeyaml.Yaml;
 import utils.DataProvider;
 
@@ -16,8 +13,8 @@ import static java.lang.System.getProperty;
 
 @Configuration
 @ComponentScan(
-  basePackages = {"framework", "utils"})
-@EnableRetry
+  basePackages = {"framework", "utils", "database"})
+@Import({DatabaseConfiguration.class})
 public class AppSpringConfig {
 
   @Bean

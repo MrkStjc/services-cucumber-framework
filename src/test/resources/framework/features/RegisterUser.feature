@@ -2,8 +2,6 @@
 @RegisterUser
 Feature: Register new user using PUT /users/register API.
 
-  #TODO: Username and other fields with spaces....
-
 
   @Issue1 @smoke
   Scenario: Register new user with unique username and verify response data

@@ -129,11 +129,11 @@ NOTE1: According to requirements username field length restrictions are that it 
 
 NOTE2: It is not clear if min and max length boundaries should be inclusive or exclusive - question for business.
 
-* See data table below for scenarios and expected / actual behaviors:
+Expected behavior: Lower boundary is 6 and upper boundary is 50. 201 API status code for valid length inputs.
 
-| Username length 	| Expected behavior                                                                           	| Actual behavior                              	|
-|-----------------	|---------------------------------------------------------------------------------------------	|----------------------------------------------	|
-| 5               	| 400 with error Username must not be longer than 50 characters or shorter than 6 characters. 	| 201 user is created.                         	|
-| 51              	| 400 with error Username must not be longer than 50 characters or shorter than 6 characters. 	| Typo in error message, that instead of than. 	|
-| 49              	| 201 User is created.                                                                        	| DataException on server.                     	|
-| 50              	| 201 User is created.                                                                        	| DataException on server.                     	|
+Actual behavior: Lower boundary is 5 Upper boundary is 20. Error in application logs for > 20 char inputs is:
+
+```
+2021-06-30 22:44:31.149  WARN 58765 --- [io-8080-exec-10] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 22001, SQLState: 22001
+2021-06-30 22:44:31.149 ERROR 58765 --- [io-8080-exec-10] o.h.engine.jdbc.spi.SqlExceptionHelper   : Value too long for column "USERNAME VARCHAR(20)": "'mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdjxzz-TST079' (50)"; SQL statement:
+```
