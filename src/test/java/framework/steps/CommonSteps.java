@@ -3,18 +3,18 @@ package framework.steps;
 import framework.BaseClient;
 import io.cucumber.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.ScenarioContext;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.apache.http.HttpStatus.*;
 
 public class CommonSteps {
 
-  @Autowired
-  private ScenarioContext scenarioContext;
+  private BaseClient baseClient;
 
   @Autowired
-  private BaseClient baseClient;
+  public CommonSteps(BaseClient baseClient) {
+    this.baseClient = baseClient;
+  }
 
   @Then("status code is 2xx")
   public void statusCode2xx() {

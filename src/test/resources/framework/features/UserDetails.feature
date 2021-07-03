@@ -11,6 +11,7 @@ Feature: Get user details using GET /users/{username}
     When I get user details for username: from context
     Then verify that get user details response has same data as stored in db
 
+
   @smoke @negative
   Scenario: Bad request error on get user details of non existing user attempt
 

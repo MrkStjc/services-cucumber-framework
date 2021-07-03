@@ -8,6 +8,7 @@ so it can allow QA engineers to write tests in convenient way following pattern 
 e.g. doesn't need to be proficient in Spring - just autowire stuff it needs...
 
 ## Running tests using Maven
+Use Java 11 in your dev environment.
 You should navigate to this project root directory and open terminal at this folder - IDEA always opens 
 terminal at project root folder. Starting command is ```mvn``` then ```test``` following options with which you
 want to run your tests. In next sections we will mention all mandatory and optional run options.
@@ -100,7 +101,6 @@ What                                                                            
 Multithreading capability                                                              Implement spring framework Scope interface and use ThreadLocal to store all components annotated with @Scope(MyScope.NAME).
 Several database connections using spring orm                                          Implementation is similar to current one just since we would be creating beans with same return types we would need to define @Qualifier annotations for such beans.
 Allure attachment below test steps - not in teardown                                   It would require custom allure lifecycle implementation - therefore we wouldn't attach screenshot in @After in Hooks.class
-Constructor based dependency injection                                                 It is best practice not to use field injections since it is internally using reflection and can cause some performance issues if framework grows substantialy
 Run application under test in local env before tests and close it after tests are done Create maven profile and inject script that will build app - one of parameters provided can be path to .war file on local machine. 
 Remove annoying spring boot INFO and DEBUG logs from console                           Identify dependencies that are generating these logs and use log4j.xml file to manage them
 ```

@@ -17,14 +17,15 @@ import static utils.constants.ScenarioContextConstants.USERNAME;
 
 public class UserServiceSteps {
 
-  @Autowired
   private ScenarioContext scenarioContext;
 
-  @Autowired
   private RegistrationClient registrationClient;
 
   @Autowired
-  private CommonSteps commonSteps;
+  public UserServiceSteps(ScenarioContext scenarioContext, RegistrationClient registrationClient) {
+    this.registrationClient = registrationClient;
+    this.scenarioContext = scenarioContext;
+  }
 
   @Given("I create new user with data: {convertToUserData}")
   public void createNewUser(LoginRequest request) {

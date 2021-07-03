@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.*;
 
-import static java.util.logging.Level.ALL;
 import static java.util.logging.Level.FINE;
 
 public class CaptureLog {
@@ -32,7 +31,7 @@ public class CaptureLog {
 
     Logger logger = Logger.getLogger(loggerName);
     logger.setUseParentHandlers(false);
-    logger.setLevel(ALL);
+    logger.setLevel(FINE);
 
     logger.addHandler(fileHandler);
     logger.addHandler(consoleHandler);
@@ -54,21 +53,13 @@ public class CaptureLog {
       }
       fileHandler.setFormatter(new SimpleFormatter());
     }
-    String fileLoggingLevel = System.getProperty("file.logging.level");
-    fileHandler.setLevel((fileLoggingLevel == null || fileLoggingLevel.isEmpty()
-            ? DEFAULT_FILE_LOGGING_LEVEL
-            : Level.parse(fileLoggingLevel))
-    );
+    fileHandler.setLevel(DEFAULT_CONSOLE_LOGGING_LEVEL);
   }
 
   private static void configureConsoleHandler() {
     if (consoleHandler == null) {
       consoleHandler = new ConsoleHandler();
-      String consoleLoggingLevel = System.getProperty("console.logging.level");
-      consoleHandler.setLevel((consoleLoggingLevel == null || consoleLoggingLevel.isEmpty()
-              ? DEFAULT_CONSOLE_LOGGING_LEVEL
-              : Level.parse(consoleLoggingLevel))
-      );
+      consoleHandler.setLevel(DEFAULT_FILE_LOGGING_LEVEL);
     }
   }
 

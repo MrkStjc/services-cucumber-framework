@@ -19,12 +19,13 @@ Feature: Login user using POST /users/register API.
     Then status code is 2xx
     When I login using login data from context and <fieldName> field value: <value>
     Then status code is 4xx
-    Then verify that response has message: Login failed.
+    And verify that response has message: Login failed.
 
     Examples:
     |fieldName |value                |
     |USERNAME  |nonexistinguser345444|
     |PASSWORD  |Marko12345!!         |
+
 
   @negative @smoke
   Scenario: Unable to login using existing user username and other user password

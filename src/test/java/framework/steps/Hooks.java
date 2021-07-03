@@ -10,11 +10,15 @@ import static io.restassured.RestAssured.*;
 
 public class Hooks {
 
-  @Autowired
   private ScenarioContext scenarioContext;
 
-  @Autowired
   private BaseClient baseClient;
+
+  @Autowired
+  public Hooks(ScenarioContext scenarioContext, BaseClient baseClient) {
+    this.scenarioContext = scenarioContext;
+    this.baseClient = baseClient;
+  }
 
   @After
   public void afterScenario(Scenario scenario) {

@@ -1,9 +1,13 @@
 package framework.models.requests;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class LoginRequest {
 
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String firstName;
 
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   private String lastName;
 
   private String password;

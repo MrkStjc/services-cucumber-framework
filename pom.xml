@@ -16,16 +16,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-core.version>5.3.0</spring-core.version>
         <jackson-core.version>2.11.0</jackson-core.version>
         <allure.version>2.14.0</allure.version>
         <snakeyaml.version>1.23</snakeyaml.version>
         <cucumber.version>6.10.4</cucumber.version>
         <surefire.version>2.20</surefire.version>
-
-        <!-- Properties for setting logging level for console -->
-        <!-- Use: OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST, ALL in run, if not used default is FINE-->
-        <console.logging.level>INFO</console.logging.level>
     </properties>
 
     <dependencies>
@@ -37,12 +32,6 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>${snakeyaml.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
         </dependency>
 
         <!-- Core client that is wrapped in RestClient -->
@@ -112,18 +101,9 @@
             <version>5.1.8.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.4.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vladmihalcea</groupId>
-            <artifactId>hibernate-types-52</artifactId>
-            <version>2.10.2</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
