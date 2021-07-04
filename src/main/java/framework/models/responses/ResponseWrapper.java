@@ -32,8 +32,4 @@ public class ResponseWrapper<T> {
     this.errorMessage = errorMessage;
   }
 
-  public String getErrorMessage() {
-    return errorMessage;
-  }
-
 }

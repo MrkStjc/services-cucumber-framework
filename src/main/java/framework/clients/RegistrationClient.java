@@ -16,8 +16,9 @@ public class RegistrationClient extends BaseClient {
   private static final String LOGIN = "/users/login";
   private static final String REGISTER = "/users/register";
 
-  public void findUserByUsername(String username) {
+  public ResponseWrapper<RegisterResponse> findUserByUsername(String username) {
     restClient.get(baseUrl + format(BY_USERNAME, username));
+    return getWrappedResponseObject(RegisterResponse.class);
   }
 
   public void deleteUserByUsername(String username) {

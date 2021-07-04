@@ -31,7 +31,6 @@ public class CaptureLog {
 
     Logger logger = Logger.getLogger(loggerName);
     logger.setUseParentHandlers(false);
-    logger.setLevel(FINE);
 
     logger.addHandler(fileHandler);
     logger.addHandler(consoleHandler);
