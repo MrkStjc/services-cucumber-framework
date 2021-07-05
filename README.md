@@ -7,7 +7,7 @@ With it I wanted to demonstrate one of the ways one API testing framework can lo
 so it can allow QA engineers to write tests in convenient way following pattern without having to know much about technical details behind - 
 e.g. doesn't need to be proficient in Spring - just autowire stuff it needs...
 
-We can in this framework find example of integration - functional approach to testing an APIs. We use also plugins / dependencies that import
+We can in this framework find example of integration - functional approach to testing an APIs. We could use also plugins / dependencies that import
 swagger.json file and we can then validate API schemas and so on, but that might be more scope of related API unit tests.
 
 ## Running tests using Maven
